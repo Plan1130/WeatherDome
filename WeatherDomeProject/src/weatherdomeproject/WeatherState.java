@@ -141,7 +141,7 @@ public class WeatherState {
         builder.append("maxVisibility = " + maxVisibility + " | ");
         builder.append("cloudCover = " + cloudCover + " | ");
         builder.append("humidity = " + humidity + " | ");
-        return builder.toString();
+        return builder.toString().replaceAll("-2147483648", "NULL");
     }
     
     public static class ValueNotFoundException extends Exception {
