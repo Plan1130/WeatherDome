@@ -11,9 +11,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- *
- * @author FlorianF
+ * GITHUB
+ * @author JoeyIsEenVirus.exe
  */
+
 public class Database {
     
     private String databasename = "src/databases/";
