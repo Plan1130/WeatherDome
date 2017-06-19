@@ -9,8 +9,14 @@ package weatherdomeproject;
  *
  * @author Sander
  */
+
 public class WeatherState {
-    public WeatherState(){
-        
+    private int windDirection;
+
+    public int getWindDirection() {
+        return windDirection;
+    }
+    public WeatherState(int windDirection) {
+        this.windDirection = windDirection;
     }
 }

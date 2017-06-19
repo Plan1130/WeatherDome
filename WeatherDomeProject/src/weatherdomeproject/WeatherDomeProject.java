@@ -14,6 +14,8 @@ public class WeatherDomeProject {
     static final Database twentedb = new Database("datatwente.csv");
     static final Database dikkenegerdb = new Database("newfile.csv");
     
+    private WeatherState current;
+    
     /**
      * @param args the command line arguments stop die maar in je reet java
      */
