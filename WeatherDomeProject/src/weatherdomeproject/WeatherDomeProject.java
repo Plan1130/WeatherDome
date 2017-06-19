@@ -10,7 +10,8 @@ package weatherdomeproject;
  * @author Sander
  */
 public class WeatherDomeProject {
-
+    Database twentedb = new Database("datatwente.csv");
+    
     /**
      * @param args the command line arguments
      */
