@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * GITHUB
@@ -38,8 +36,8 @@ public class Database {
         }
         try { 
             totaldays = countLines(databasename);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
@@ -65,8 +63,7 @@ public class Database {
         int dateToFind = Integer.parseInt(builder.toString());
         
         //Seek and destroy
-        int lineNumber = 0;
-        String read = "";
+        String read;
         String[] readArr;
         String[] foundData = null;
         
@@ -105,7 +102,7 @@ public class Database {
     
     public void testRead() {
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
 
         try {
