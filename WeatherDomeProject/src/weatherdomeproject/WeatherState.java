@@ -11,6 +11,8 @@ package weatherdomeproject;
  */
 
 public class WeatherState {
+    public static final int VOID = Integer.MIN_VALUE;
+    
     private final int windDirection;
     private final int vectorWindSpeed;
     private final int meanWindSpeed;
@@ -26,7 +28,7 @@ public class WeatherState {
     private final int maxVisibility;
     private final int cloudCover;
     private final int humidity;
-
+    
     public WeatherState(int windDirection, int vectorWindSpeed, int meanWindSpeed, int meanTemperature, int minTemperature, int maxTemperature, int sunDuration, int sunPercentage, int globalRadiation, int percipitationDuration, int percipitationAmount, int minVisibility, int maxVisibility, int cloudCover, int humidity) {
         this.windDirection = windDirection;
         this.vectorWindSpeed = vectorWindSpeed;
@@ -44,64 +46,85 @@ public class WeatherState {
         this.cloudCover = cloudCover;
         this.humidity = humidity;
     }
-
-    public int getWindDirection() {
+    
+    public int getWindDirection() throws ValueNotFoundException {
+        if (windDirection == VOID) throw new ValueNotFoundException();
         return windDirection;
     }
-
-    public int getVectorWindSpeed() {
+    
+    public int getVectorWindSpeed() throws ValueNotFoundException {
+        if (vectorWindSpeed == VOID) throw new ValueNotFoundException();
         return vectorWindSpeed;
     }
-
-    public int getMeanWindSpeed() {
+    
+    public int getMeanWindSpeed() throws ValueNotFoundException {
+        if (meanWindSpeed == VOID) throw new ValueNotFoundException();
         return meanWindSpeed;
     }
-
-    public int getMeanTemperature() {
+    
+    public int getMeanTemperature() throws ValueNotFoundException {
+        if (meanTemperature == VOID) throw new ValueNotFoundException();
         return meanTemperature;
     }
-
-    public int getMinTemperature() {
+    
+    public int getMinTemperature() throws ValueNotFoundException {
+        if (minTemperature == VOID) throw new ValueNotFoundException();
         return minTemperature;
     }
 
-    public int getMaxTemperature() {
+    public int getMaxTemperature() throws ValueNotFoundException {
+        if (maxTemperature == VOID) throw new ValueNotFoundException();
         return maxTemperature;
     }
 
-    public int getSunDuration() {
+    public int getSunDuration() throws ValueNotFoundException {
+        if (sunDuration == VOID) throw new ValueNotFoundException();
         return sunDuration;
     }
 
-    public int getSunPercentage() {
+    public int getSunPercentage() throws ValueNotFoundException {
+        if (sunPercentage == VOID) throw new ValueNotFoundException();
         return sunPercentage;
     }
 
-    public int getGlobalRadiation() {
+    public int getGlobalRadiation() throws ValueNotFoundException {
+        if (globalRadiation == VOID) throw new ValueNotFoundException();
         return globalRadiation;
     }
 
-    public int getPercipitationDuration() {
+    public int getPercipitationDuration() throws ValueNotFoundException {
+        if (percipitationDuration == VOID) throw new ValueNotFoundException();
         return percipitationDuration;
     }
 
-    public int getPercipitationAmount() {
+    public int getPercipitationAmount() throws ValueNotFoundException {
+        if (percipitationAmount == VOID) throw new ValueNotFoundException();
         return percipitationAmount;
     }
 
-    public int getMinVisibility() {
+    public int getMinVisibility() throws ValueNotFoundException {
+        if (minVisibility == VOID) throw new ValueNotFoundException();
         return minVisibility;
     }
 
-    public int getMaxVisibility() {
+    public int getMaxVisibility() throws ValueNotFoundException {
+        if (maxVisibility == VOID) throw new ValueNotFoundException();
         return maxVisibility;
     }
 
-    public int getCloudCover() {
+    public int getCloudCover() throws ValueNotFoundException {
+        if (cloudCover == VOID) throw new ValueNotFoundException();
         return cloudCover;
     }
 
-    public int getHumidity() {
+    public int getHumidity() throws ValueNotFoundException {
+        if (humidity == VOID) throw new ValueNotFoundException();
         return humidity;
+    }
+    
+    public static class ValueNotFoundException extends Exception {
+        public ValueNotFoundException(){
+            super("Value not defined in database");
+        }
     }
 }
