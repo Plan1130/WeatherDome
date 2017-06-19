@@ -23,11 +23,14 @@ public class WeatherDomeProject {
      */
     
     public static void main(String[] args) {
+        
         try {
-            twentedb.getWeatherState(2016,1,1);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            current = twentedb.getWeatherState(1955,1,1);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        
+
         
     }
     
