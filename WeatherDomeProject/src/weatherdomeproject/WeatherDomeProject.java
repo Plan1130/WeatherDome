@@ -7,17 +7,18 @@ package weatherdomeproject;
 
 /**
  *
- * @author Sander
+ * @author MA NIGGA
  */
 public class WeatherDomeProject {
-    Database twentedb = new Database("datatwente.csv");
+    static final Database twentedb = new Database("datatwente.csv");
     
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments stop die maar in je reet java
      */
+    
     public static void main(String[] args) {
+        twentedb.testRead();
         
-        // TODO code application logic here
     }
     
 }
