@@ -16,10 +16,17 @@ import java.io.IOException;
  */
 public class Database {
     
-    private String databasename;
+    private String databasename = "src/databases/";
+    private FileReader filereader;
     
-    public Database(String databasename) {
-        this.databasename = "/databases/" + databasename;
+    public Database(String filename) {
+        databasename += filename;
+        try {
+            this.filereader = new FileReader(databasename);
+            System.out.println("Database found!");
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     
     public void testRead() {
@@ -29,18 +36,16 @@ public class Database {
 
         try {
 
-            br = new BufferedReader(new FileReader(databasename));
+            br = new BufferedReader(filereader);
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
-                String[] country = line.split(cvsSplitBy);
+                String[] day = line.split(cvsSplitBy);
 
-                System.out.println("Country [code= " + country[4] + " , name=" + country[5] + "]");
+                System.out.println(day[0]);
 
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
