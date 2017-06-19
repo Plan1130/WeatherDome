@@ -5,6 +5,10 @@
  */
 package weatherdomeproject;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author MA NIGGA
@@ -19,7 +23,11 @@ public class WeatherDomeProject {
      */
     
     public static void main(String[] args) {
-        twentedb.getWeatherState(2016,1,1);
+        try {
+            twentedb.getWeatherState(2016,1,1);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         
     }
     
