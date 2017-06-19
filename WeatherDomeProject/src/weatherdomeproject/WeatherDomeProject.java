@@ -11,10 +11,8 @@ package weatherdomeproject;
  */
 public class WeatherDomeProject {
     //Databases are located in src/databases
-    static final Database twentedb = new Database("datatwente.csv");
-    static final Database dikkenegerdb = new Database("newfile.csv");
-    
-    private WeatherState current;
+    private static Database twentedb = new Database("datatwente.csv");
+    private static WeatherState current;
     
     /**
      * @param args the command line arguments stop die maar in je reet java
