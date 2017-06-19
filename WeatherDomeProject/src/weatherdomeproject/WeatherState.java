@@ -122,9 +122,32 @@ public class WeatherState {
         return humidity;
     }
     
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("WeatherState Summary: \n");
+        builder.append("windDirection = " + windDirection + " | ");
+        builder.append("vectorWindSpeed = " + vectorWindSpeed + " | ");
+        builder.append("meanWindSpeed = " + meanWindSpeed + " | ");
+        builder.append("meanTemperature = " + meanTemperature + " | ");
+        builder.append("minTemperature = " + minTemperature + " | ");
+        builder.append("maxTemperature = " + maxTemperature + " | ");
+        builder.append("sunDuration = " + sunDuration + " | \n");
+        builder.append("sunPercentage = " + sunPercentage + " | ");
+        builder.append("globalRadiation = " + globalRadiation + " | ");
+        builder.append("percipitationDuration = " + percipitationDuration + " | ");
+        builder.append("percipitationAmount = " + percipitationAmount + " | ");
+        builder.append("minVisibility = " + minVisibility + " | \n");
+        builder.append("maxVisibility = " + maxVisibility + " | ");
+        builder.append("cloudCover = " + cloudCover + " | ");
+        builder.append("humidity = " + humidity + " | ");
+        return builder.toString();
+    }
+    
     public static class ValueNotFoundException extends Exception {
         public ValueNotFoundException(){
             super("Value not defined in database");
         }
     }
+    
 }

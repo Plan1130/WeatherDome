@@ -84,7 +84,7 @@ public class Database {
             
             for (String s : foundData) {
                 if (s.equals("     ")) {
-                    editData.add(Integer.MIN_VALUE);
+                    editData.add(WeatherState.VOID);
                 } else {
                     editData.add(Integer.parseInt(s));
                 }                
@@ -100,36 +100,6 @@ public class Database {
         }        
     }
     
-    public void testRead() {
-        BufferedReader br = null;
-        String line;
-        String cvsSplitBy = ",";
-
-        try {
-
-            br = new BufferedReader(filereader);
-            while ((line = br.readLine()) != null) {
-
-                // use comma as separator
-                String[] day = line.split(cvsSplitBy);
-
-                System.out.println(day[0]);
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
     
     public static int countLines(String filename) throws IOException {
     InputStream is = new BufferedInputStream(new FileInputStream(filename));

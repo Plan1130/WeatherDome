@@ -5,10 +5,6 @@
  */
 package weatherdomeproject;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author MA NIGGA
@@ -19,16 +15,18 @@ public class WeatherDomeProject {
     private static WeatherState current;
     
     /**
-     * @param args the command line arguments stop die maar in je reet java
+     * @param args the command line arguments maar in je reet java
      */
     
     public static void main(String[] args) {
         
         try {
-            current = twentedb.getWeatherState(1955,1,1);
+            current = twentedb.getWeatherState(2015,1,1);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        System.out.println(current.toString());
 
     }
     
