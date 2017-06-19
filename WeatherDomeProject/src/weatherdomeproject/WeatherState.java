@@ -11,21 +11,21 @@ package weatherdomeproject;
  */
 
 public class WeatherState {
-    private int windDirection;
-    private int vectorWindSpeed;
-    private int meanWindSpeed;
-    private int meanTemperature;
-    private int minTemperature;
-    private int maxTemperature;
-    private int sunDuration;
-    private int sunPercentage;
-    private int globalRadiation;
-    private int percipitationDuration;
-    private int percipitationAmount;
-    private int minVisibility;
-    private int maxVisibility;
-    private int cloudCover;
-    private int humidity;
+    private final int windDirection;
+    private final int vectorWindSpeed;
+    private final int meanWindSpeed;
+    private final int meanTemperature;
+    private final int minTemperature;
+    private final int maxTemperature;
+    private final int sunDuration;
+    private final int sunPercentage;
+    private final int globalRadiation;
+    private final int percipitationDuration;
+    private final int percipitationAmount;
+    private final int minVisibility;
+    private final int maxVisibility;
+    private final int cloudCover;
+    private final int humidity;
 
     public WeatherState(int windDirection, int vectorWindSpeed, int meanWindSpeed, int meanTemperature, int minTemperature, int maxTemperature, int sunDuration, int sunPercentage, int globalRadiation, int percipitationDuration, int percipitationAmount, int minVisibility, int maxVisibility, int cloudCover, int humidity) {
         this.windDirection = windDirection;
