@@ -29,9 +29,7 @@ public class WeatherDomeProject {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
 
-        
     }
     
 }

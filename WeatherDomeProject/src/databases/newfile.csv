@@ -14,3 +14,25 @@ VVN       = Minimum visibility; 0: <100 m, 1:100-200 m, 2:200-300 m,..., 49:4900
 VVX       = Maximum visibility; 0: <100 m, 1:100-200 m, 2:200-300 m,..., 49:4900-5000 m, 50:5-6 km, 56:6-7 km, 57:7-8 km,..., 79:29-30 km, 80:30-35 km, 81:35-40 km,..., 89: >70 km)\
 NG        = Mean daily cloud cover (in octants, 9=sky invisible)\
 UG        = Daily mean relative atmospheric humidity (in percents)
+
+
+
+
+LEGACY CODE:
+
+ZIEK GOEDE CODE (too much for sandah)
+
+try {
+            while (((read = ziekereader.readLine()) != null) && ((lineNumber = lineNumber + 1) == lineNumber) && (currFind != dateToFind)) {
+                String[] readArr = read.split(",");
+                currFind = Integer.parseInt(readArr[0]);
+            }
+        } catch (Exception erreur) {
+            erreur.printStackTrace();
+        }
+        
+        if (currFind == dateToFind) {
+            System.out.println("DATE FOUND at line " +lineNumber);
+        } else {
+            System.out.println("DATE NOT FOUND");
+        }
