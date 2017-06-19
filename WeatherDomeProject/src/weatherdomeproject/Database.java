@@ -10,18 +10,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CSVReader {
-
-    public static void main(String[] args) {
-
-        String csvFile = "/Users/mkyong/csv/country.csv";
+/**
+ *
+ * @author FlorianF
+ */
+public class Database {
+    
+    private String databasename;
+    
+    public Database(String databasename) {
+        this.databasename = "/databases/" + databasename;
+    }
+    
+    public void testRead() {
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ",";
 
         try {
 
-            br = new BufferedReader(new FileReader(csvFile));
+            br = new BufferedReader(new FileReader(databasename));
             while ((line = br.readLine()) != null) {
 
                 // use comma as separator
@@ -46,5 +54,4 @@ public class CSVReader {
         }
 
     }
-
 }
