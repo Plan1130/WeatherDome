@@ -19,7 +19,7 @@ public class WeatherDomeProject {
      */
     
     public static void main(String[] args) {
-        twentedb.testRead();
+        twentedb.getWeatherState(2016,1,1);
         
     }
     
