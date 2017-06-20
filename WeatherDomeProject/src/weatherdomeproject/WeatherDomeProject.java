@@ -5,6 +5,7 @@
  */
 package weatherdomeproject;
 
+
 /**
  *
  * @author MA NIGGA
@@ -21,7 +22,7 @@ public class WeatherDomeProject {
     public static void main(String[] args) {
         
         try {
-            current = twentedb.getWeatherState(2015,1,1);
+            current = twentedb.getWeatherState(2000,1,1);
         } catch (Exception e) {
             e.printStackTrace();
         }
