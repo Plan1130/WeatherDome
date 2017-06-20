@@ -38,5 +38,6 @@ public class VideoPlayer {
     
     public void ChangeVideo() {
         mediaPlayerComponent.getMediaPlayer().playMedia("src/video/WizardCat.mp4");//Movie name which want to play
+        mediaPlayerComponent.getMediaPlayer().playMedia("src/video/WHATAREYOUDOINGONCOMPUTER.mp4");//Movie name which want to play
     }
 }
