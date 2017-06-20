@@ -50,6 +50,7 @@ public class ArduinoClient {
         try {
            Response response = client.newCall(request).execute();
            ret = response.body().string();
+           System.out.println(ret);
         } catch (IOException e) {
             e.printStackTrace();
         }

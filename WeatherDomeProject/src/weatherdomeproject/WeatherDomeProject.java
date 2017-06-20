@@ -16,9 +16,8 @@ public class WeatherDomeProject {
     //Databases are located in src/databases
     private static Database twentedb = new Database("datatwente.csv");
     private static WeatherState current;
-    private static ArduinoClient arduinopost;
-    private static ArduinoClient arduinoget;
-    private final static String arduinoIP = "192.168.10.10";
+    private static ArduinoClient arduino;
+    private final static String arduinoIP = "http://192.168.10.10";
     
     /**
      * @param args the command line arguments maar in je reet java
@@ -29,10 +28,10 @@ public class WeatherDomeProject {
         //VideoPlayer vidplayer = new VideoPlayer();
         
         //START CLIENT
-        arduinopost = new ArduinoClient();
+        arduino = new ArduinoClient();
         String[] data = {"test","5","test2","6"};
-        arduinopost.PostData(data,arduinoIP);
-        arduinopost.GetData(arduinoIP);
+        arduino.PostData(data,arduinoIP);
+        arduino.GetData(arduinoIP);
         
         
         
