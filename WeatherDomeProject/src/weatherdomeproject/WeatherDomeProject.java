@@ -8,6 +8,7 @@ package weatherdomeproject;
 import javax.swing.SwingUtilities;
 
 
+
 /**
  *
  * @author MA NIGGA
@@ -24,8 +25,14 @@ public class WeatherDomeProject {
      */
     
     public static void main(String[] args) {
+        
         //START VIDEO
-        //VideoPlayer vidplayer = new VideoPlayer();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                VideoPlayer vlcPlayer = new VideoPlayer("Yee");
+            }
+        });
         
         //START CLIENT
         arduino = new ArduinoClient();
@@ -33,18 +40,13 @@ public class WeatherDomeProject {
         arduino.PostData(data,arduinoIP);
         arduino.GetData(arduinoIP);
         
-        
-        
-        
         //DATABASE CALL
         try {
             current = twentedb.getWeatherState(2000,1,1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
         System.out.println(current.toString());
-
     }
     
 }

@@ -2,46 +2,41 @@
  * WeatherDome!
  */
 package weatherdomeproject;
-
-import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
-import uk.co.caprica.vlcj.player.embedded.FullScreenStrategy;
-import uk.co.caprica.vlcj.player.embedded.x.XFullScreenStrategy;
-import uk.co.caprica.vlcj.test.VlcjTest;
-
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.discovery.NativeDiscovery;
 
-/**
- *
- * @author FlorianF
- */
-public class VideoPlayer extends VlcjTest {
-
-    private JFrame frame;
+public class VideoPlayer {
 
     private EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
-    @SuppressWarnings("serial")
-    public VideoPlayer() {
-        frame = new JFrame("LibX11 Full Screen Strategy");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocation(100, 100);
-        frame.setSize(1200, 800);
+    //This is the path for libvlc.dll
+    static String VLCLIBPATH = "C:\\Program Files\\VideoLAN\\VLC";
 
-        mediaPlayerComponent = new EmbeddedMediaPlayerComponent() {
-            @Override
-            protected FullScreenStrategy onGetFullScreenStrategy() {
-                return new XFullScreenStrategy(frame);
-            }
-        };
+    public VideoPlayer(String name) {
+        boolean found = new NativeDiscovery().discover();
+        System.out.println(found);
+        System.out.println(LibVlc.INSTANCE.libvlc_get_version());
+        
+        //MAXIMIZE TO SCREEN
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+
+        JFrame frame = new JFrame(name);
+
+        mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 
         frame.setContentPane(mediaPlayerComponent);
 
+        frame.setLocation(0, 0);
+        frame.setSize(screenSize.width, screenSize.height);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-    }
 
-    protected void start(String mrl) {
-        mediaPlayerComponent.getMediaPlayer().playMedia(mrl);
-        mediaPlayerComponent.getMediaPlayer().setFullScreen(true);
+        mediaPlayerComponent.getMediaPlayer().playMedia("src/video/Yee.mp4");//Movie name which want to play
+    }
+    
+    public void ChangeVideo() {
+        mediaPlayerComponent.getMediaPlayer().playMedia("src/video/WizardCat.mp4");//Movie name which want to play
     }
 }
