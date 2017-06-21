@@ -32,7 +32,7 @@ public class WeatherDomeProject {
         //Eerst data uit de database halen, in dit geval uit 19 januari 1993
         //wat vervolgens in current WeatherState struct wordt opgeslagen
         try {
-            current = twentedb.getWeatherState(2000, 1, 1);
+            current = twentedb.getWeatherState(1993, 9, 19);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -56,9 +56,9 @@ public class Database {
         //DD
         if (day < 10) {
             builder.append(0);
-            builder.append(month);
+            builder.append(day);
         } else {
-            builder.append(month);
+            builder.append(day);
         }
         int dateToFind = Integer.parseInt(builder.toString());
         
@@ -80,7 +80,7 @@ public class Database {
         }
         
         if(foundData != null) {
-            List editData = new ArrayList<Integer>();
+            List<Integer> editData = new ArrayList<Integer>();
             
             for (String s : foundData) {
                 if (s.equals("     ")) {
@@ -90,10 +90,10 @@ public class Database {
                 }                
             }
             
-            return new WeatherState((Integer) editData.get(1),(Integer) editData.get(2),(Integer) editData.get(3),(Integer) editData.get(4)
-                    ,(Integer) editData.get(5),(Integer) editData.get(6),(Integer) editData.get(7),(Integer) editData.get(8),(Integer) editData.get(9)
-                    ,(Integer) editData.get(10),(Integer) editData.get(11),(Integer) editData.get(12),(Integer) editData.get(13),(Integer) editData.get(14)
-                    ,(Integer) editData.get(15));
+            
+            return new WeatherState(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
+                    , editData.get(6), editData.get(7), editData.get(8), editData.get(9), editData.get(10), editData.get(11)
+                    , editData.get(12), editData.get(13), editData.get(14), editData.get(15));
             
         } else {
             throw new Exception("wtf denken jij");
