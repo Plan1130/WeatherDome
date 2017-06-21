@@ -36,10 +36,11 @@ public class WeatherDomeProject {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(current.toString()); //DATA in current struct
+        //System.out.println(current.toString()); //DATA in current struct
         
         //Pass de current WeatherState naar de WeatherType class
         weather = new WeatherType(current);
+        System.out.println(weather.toString());
         
         
         /*
