@@ -80,7 +80,7 @@ public class Database {
         }
         
         if(foundData != null) {
-            List<Integer> editData = new ArrayList<Integer>();
+            List<Integer> editData = new ArrayList<>();
             
             for (String s : foundData) {
                 if (s.equals("     ")) {
