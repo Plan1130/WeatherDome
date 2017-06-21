@@ -17,6 +17,7 @@ public class WeatherDomeProject {
     //Databases are located in src/databases
     private static Database twentedb = new Database("datatwente.csv");
     private static WeatherState current;
+    private static WeatherType weather;
     private static ArduinoClient arduino;
     private final static String arduinoIP = "http://192.168.10.10";
     
@@ -26,6 +27,22 @@ public class WeatherDomeProject {
     
     public static void main(String[] args) {
         
+        //DEBUGGING WEATHER TYPE
+        
+        //Eerst data uit de database halen, in dit geval uit 19 januari 1993
+        //wat vervolgens in current WeatherState struct wordt opgeslagen
+        try {
+            current = twentedb.getWeatherState(2000, 1, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(current.toString()); //DATA in current struct
+        
+        //Pass de current WeatherState naar de WeatherType class
+        weather = new WeatherType(current);
+        
+        
+        /*
         //START VIDEO
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -47,6 +64,7 @@ public class WeatherDomeProject {
             e.printStackTrace();
         }
         System.out.println(current.toString());
-    }
+    */
     
+    }
 }
