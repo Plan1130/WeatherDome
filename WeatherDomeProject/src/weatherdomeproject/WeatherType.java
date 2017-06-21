@@ -12,6 +12,7 @@ public class WeatherType {
     boolean isRaining;
     rainIntensity rainType;
     enum rainIntensity {LOW,MEDIUM,HIGH};
+    //this is blabaosi
     
     public WeatherType(WeatherState state) {
         this.state = state;
