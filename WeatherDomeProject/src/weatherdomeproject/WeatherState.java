@@ -47,78 +47,78 @@ public class WeatherState {
         this.humidity = humidity;
     }
     
-    public int getWindDirection() throws ValueNotFoundException {
-        if (windDirection == VOID) throw new ValueNotFoundException();
+    public int getWindDirection() {
+        if (windDirection == VOID);
         return windDirection;
     }
     
-    public int getVectorWindSpeed() throws ValueNotFoundException {
-        if (vectorWindSpeed == VOID) throw new ValueNotFoundException();
+    public int getVectorWindSpeed() {
+        if (vectorWindSpeed == VOID);
         return vectorWindSpeed;
     }
     
-    public int getMeanWindSpeed() throws ValueNotFoundException {
-        if (meanWindSpeed == VOID) throw new ValueNotFoundException();
+    public int getMeanWindSpeed() {
+        if (meanWindSpeed == VOID);
         return meanWindSpeed;
     }
     
-    public int getMeanTemperature() throws ValueNotFoundException {
-        if (meanTemperature == VOID) throw new ValueNotFoundException();
+    public int getMeanTemperature() {
+        if (meanTemperature == VOID);
         return meanTemperature;
     }
     
-    public int getMinTemperature() throws ValueNotFoundException {
-        if (minTemperature == VOID) throw new ValueNotFoundException();
+    public int getMinTemperature() {
+        if (minTemperature == VOID);
         return minTemperature;
     }
 
-    public int getMaxTemperature() throws ValueNotFoundException {
-        if (maxTemperature == VOID) throw new ValueNotFoundException();
+    public int getMaxTemperature() {
+        if (maxTemperature == VOID);
         return maxTemperature;
     }
 
-    public int getSunDuration() throws ValueNotFoundException {
-        if (sunDuration == VOID) throw new ValueNotFoundException();
+    public int getSunDuration() {
+        if (sunDuration == VOID);
         return sunDuration;
     }
 
-    public int getSunPercentage() throws ValueNotFoundException {
-        if (sunPercentage == VOID) throw new ValueNotFoundException();
+    public int getSunPercentage() {
+        if (sunPercentage == VOID);
         return sunPercentage;
     }
 
-    public int getGlobalRadiation() throws ValueNotFoundException {
-        if (globalRadiation == VOID) throw new ValueNotFoundException();
+    public int getGlobalRadiation() {
+        if (globalRadiation == VOID);
         return globalRadiation;
     }
 
-    public int getPercipitationDuration() throws ValueNotFoundException {
-        if (percipitationDuration == VOID) throw new ValueNotFoundException();
+    public int getPercipitationDuration() {
+        if (percipitationDuration == VOID);
         return percipitationDuration;
     }
 
-    public int getPercipitationAmount() throws ValueNotFoundException {
-        if (percipitationAmount == VOID) throw new ValueNotFoundException();
+    public int getPercipitationAmount() {
+        if (percipitationAmount == VOID);
         return percipitationAmount;
     }
 
-    public int getMinVisibility() throws ValueNotFoundException {
-        if (minVisibility == VOID) throw new ValueNotFoundException();
+    public int getMinVisibility() {
+        if (minVisibility == VOID);
         return minVisibility;
     }
 
-    public int getMaxVisibility() throws ValueNotFoundException {
-        if (maxVisibility == VOID) throw new ValueNotFoundException();
+    public int getMaxVisibility() {
+        if (maxVisibility == VOID);
         return maxVisibility;
     }
 
-    public int getCloudCover() throws ValueNotFoundException {
-        if (cloudCover == VOID) throw new ValueNotFoundException();
+    public int getCloudCover() {
+        if (cloudCover == VOID);
         return cloudCover;
     }
 
-    public int getHumidity() throws ValueNotFoundException {
-        if (humidity == VOID) throw new ValueNotFoundException();
+    public int getHumidity() {
+        if (humidity == VOID);
         return humidity;
     }
     
