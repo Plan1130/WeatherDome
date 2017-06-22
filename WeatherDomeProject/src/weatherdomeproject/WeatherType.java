@@ -11,13 +11,11 @@ public class WeatherType {
     private WeatherState state;
     boolean isRaining;
     boolean isSnowing;
-    rainIntensity rainType;
-    windIntensity windType;
-    temperatureIntensity temperatureType;
-    enum rainIntensity {NONE,LOW,MEDIUM,HIGH};
-    enum windIntensity {LOW,MEDIUM,HIGH};
-    enum temperatureIntensity {FREEZE,COLD,WARM,HOT};
-    //this is blabaosi
+    
+    int temperatureIntensity;
+    int windIntensity;
+    int cloudIntensity;
+    int precipitationType;
     
     public WeatherType(WeatherState state) {
         this.state = state;
@@ -25,61 +23,72 @@ public class WeatherType {
     }
     
     private void setValues() {
-        setRainType();
+        setPrecipitationType();
         setWindType();
         setTemperatureType();
-        checkForSnow();
+        setCloudType();
         
     }
-    private void setRainType(){
-        isRaining = state.getPercipitationAmount() > 1 ? true : false;
+    //type of rain: 0: no rain. 1: rain. 2: thunder. 3: snow.
+    private void setPrecipitationType(){
+        boolean isFreezing = false;
+        boolean isRaining = false;
+        boolean isThunder = false;
+        if(state.getMeanTemperature() < 1){
+            isFreezing = true;
+        }
+        if(state.getPercipitationAmount() > 50){
+            isRaining = true;
+        }
         
-        
-        if (isRaining && state.getPercipitationAmount() < 10) {
-            rainType = rainIntensity.LOW;
-        } else if (state.getPercipitationAmount() > 10) {
-            rainType = rainIntensity.MEDIUM;
-        } else if (state.getPercipitationAmount() > 25) {
-            rainType = rainIntensity.HIGH;
-        } else if(!isRaining){
-            rainType = rainIntensity.NONE;
+        if(!isRaining){
+            precipitationType = 0; //no rain
+        }
+        if(isRaining && !isFreezing && !isThunder){
+            precipitationType = 1; //is rain
+        }
+        if(isRaining && !isFreezing && isThunder){
+            precipitationType = 2; //is thunder
+        }
+        if(isRaining && isFreezing && !isThunder){
+            precipitationType = 3; //is snowing
         }
     }
+    //wind speed in 4 levels
     private void setWindType(){
-        if(state.getMeanWindSpeed() < 55){
-            windType = windIntensity.LOW;
+        if(state.getMeanWindSpeed() < 30){
+            windIntensity = 0;
+        }
+        if(state.getMeanWindSpeed() >= 30 && state.getMeanWindSpeed() < 55){
+            windIntensity = 1;
         } else if(state.getMeanWindSpeed() >= 55 && state.getMeanWindSpeed() <= 100){
-            windType = windIntensity.MEDIUM;
+            windIntensity = 2;
         } else if(state.getMeanWindSpeed() > 100){
-            windType = windIntensity.HIGH;
+            windIntensity = 3;
         }
     }
+    //temperature in celcius, 
     private void setTemperatureType(){
-        if(state.getMaxTemperature() <= 0){
-            temperatureType = temperatureIntensity.FREEZE;
-        } else if(state.getMaxTemperature() > 0 && state.getMaxTemperature() <= 150){
-            temperatureType = temperatureIntensity.COLD;
-        } else if(state.getMaxTemperature() > 150 && state.getMaxTemperature() <= 250){
-            temperatureType = temperatureIntensity.WARM;
-        } else if(state.getMaxTemperature() > 250){
-            temperatureType = temperatureIntensity.HOT;
-        }
+        temperatureIntensity = (state.getMeanTemperature()/10);
     }
-    private void checkForSnow(){
-        isSnowing = false;
-        System.out.println(isRaining);
-        System.out.println(state.getMinTemperature() < 0);
-        if(isRaining && state.getMinTemperature() < 0){
-            isSnowing = true;
+    
+    //cloud amount in levels of 4
+    private void setCloudType(){
+        cloudIntensity = state.getCloudCover();
+        if(cloudIntensity < 2){
+            cloudIntensity = 0;
+        }else if(cloudIntensity >= 2 && cloudIntensity < 4){
+            cloudIntensity = 1;
+        }else if(cloudIntensity >= 4 && cloudIntensity < 6){
+            cloudIntensity = 2;
+        }else if(cloudIntensity >= 6 && cloudIntensity < 9){
+            cloudIntensity = 3;
         }
     }
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("WeatherType Summary: \n");
-        builder.append("rainType = " + rainType + " | ");
-        builder.append("windType = " + windType + " | ");
-        builder.append("temperatureType = " + temperatureType + " | ");
         builder.append("is Snowing = " + isSnowing + " | ");
         return builder.toString().replaceAll("-2147483648", "NULL");
     }
