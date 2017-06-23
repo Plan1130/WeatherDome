@@ -52,6 +52,7 @@ public class WeatherDomeProject {
             }
         });
         
+        
         //START CLIENT
         arduino = new ArduinoClient();
         String[] data = {"test","5","test2","6"};
@@ -65,7 +66,7 @@ public class WeatherDomeProject {
             e.printStackTrace();
         }
         System.out.println(current.toString());
-    */
+        */
     
     }
 }
