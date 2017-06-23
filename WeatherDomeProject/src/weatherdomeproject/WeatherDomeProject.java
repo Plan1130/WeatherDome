@@ -42,31 +42,13 @@ public class WeatherDomeProject {
         weather = new WeatherType(current);
         System.out.println(weather.toString());
         
-        
-        /*
-        //START VIDEO
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                VideoPlayer vlcPlayer = new VideoPlayer("Yee");
-            }
-        });
-        
+               
         
         //START CLIENT
-        arduino = new ArduinoClient();
-        String[] data = {"test","5","test2","6"};
-        arduino.PostData(data,arduinoIP);
-        arduino.GetData(arduinoIP);
-        
-        //DATABASE CALL
-        try {
-            current = twentedb.getWeatherState(2000,1,1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(current.toString());
-        */
+//        arduino = new ArduinoClient();
+//        String[] data = {"test","5","test2","6"};
+//        arduino.PostData(data,arduinoIP);
+//        arduino.GetData(arduinoIP);
     
     }
 }
