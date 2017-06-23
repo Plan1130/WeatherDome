@@ -9,10 +9,9 @@ package weatherdomeproject;
  */
 public class WeatherType {
     private WeatherState state;
-    boolean isRaining;
-    boolean isSnowing;
+
     
-    int temperatureIntensity;
+    public int temperatureIntensity;
     int windIntensity;
     int cloudIntensity;
     int precipitationType;
@@ -34,11 +33,15 @@ public class WeatherType {
         boolean isFreezing = false;
         boolean isRaining = false;
         boolean isThunder = false;
+        
         if(state.getMeanTemperature() < 1){
             isFreezing = true;
         }
         if(state.getPercipitationAmount() > 50){
             isRaining = true;
+        }
+        if(state.getMaxTemperature() > 250 && state.getPercipitationAmount() > 100){
+            isThunder = true;
         }
         
         if(!isRaining){
@@ -47,7 +50,7 @@ public class WeatherType {
         if(isRaining && !isFreezing && !isThunder){
             precipitationType = 1; //is rain
         }
-        if(isRaining && !isFreezing && isThunder){
+        if(isThunder){
             precipitationType = 2; //is thunder
         }
         if(isRaining && isFreezing && !isThunder){
@@ -89,7 +92,6 @@ public class WeatherType {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("WeatherType Summary: \n");
-        builder.append("is Snowing = " + isSnowing + " | ");
         return builder.toString().replaceAll("-2147483648", "NULL");
     }
     
