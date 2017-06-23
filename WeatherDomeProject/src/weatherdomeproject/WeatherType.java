@@ -34,13 +34,13 @@ public class WeatherType {
         boolean isRaining = false;
         boolean isThunder = false;
         
-        if(state.getMeanTemperature() < 1){
+        if(state.getMinTemperature() < 1){
             isFreezing = true;
         }
         if(state.getPercipitationAmount() > 50){
             isRaining = true;
         }
-        if(state.getMaxTemperature() > 250 && state.getPercipitationAmount() > 100){
+        if(state.getMaxTemperature() > 250 && state.getPercipitationAmount() > 50){
             isThunder = true;
         }
         
