@@ -64,6 +64,8 @@ public class WeatherDomeProject {
             
             // Check if changed
             
+            // Alter current state
+            
             // If changed: POST new data
             //             Change video
             

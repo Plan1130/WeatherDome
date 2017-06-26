@@ -63,13 +63,13 @@ public class WeatherType {
     //wind speed in 4 levels
     private void setWindType(){
         if(state.getMeanWindSpeed() < 30){
-            windIntensity = 1;
+            windIntensity = 0;
         } else if(state.getMeanWindSpeed() >= 30 && state.getMeanWindSpeed() < 55){
-            windIntensity = 2;
+            windIntensity = 1;
         } else if(state.getMeanWindSpeed() >= 55 && state.getMeanWindSpeed() <= 100){
-            windIntensity = 3;
+            windIntensity = 2;
         } else if(state.getMeanWindSpeed() > 100){
-            windIntensity = 4;
+            windIntensity = 3;
         }
     }
     //temperature in celcius, 
@@ -81,13 +81,13 @@ public class WeatherType {
     private void setCloudType(){
         cloudIntensity = state.getCloudCover();
         if(cloudIntensity < 2){
-            cloudIntensity = 1;
+            cloudIntensity = 0;
         }else if(cloudIntensity >= 2 && cloudIntensity < 4){
-            cloudIntensity = 2;
+            cloudIntensity = 1;
         }else if(cloudIntensity >= 4 && cloudIntensity < 6){
-            cloudIntensity = 3;
+            cloudIntensity = 2;
         }else if(cloudIntensity >= 6 && cloudIntensity < 9){
-            cloudIntensity = 4;
+            cloudIntensity = 3;
         }
     }
     
