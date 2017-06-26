@@ -49,7 +49,7 @@ public class WeatherDomeProject {
         
         videomanager.getCurrentScene();
         
-        videomanager.changeScene("Scene 2ZX");
+        videomanager.changeScene("Scene 2");
                
         
         //START CLIENT
