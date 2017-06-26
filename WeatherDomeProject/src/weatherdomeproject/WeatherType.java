@@ -3,6 +3,9 @@
  */
 package weatherdomeproject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author MAX 'imaal' G
@@ -11,7 +14,7 @@ public class WeatherType {
     private WeatherState state;
 
     
-    public int temperatureIntensity;
+    int temperatureIntensity;
     int windIntensity;
     int cloudIntensity;
     int precipitationType;
@@ -60,14 +63,13 @@ public class WeatherType {
     //wind speed in 4 levels
     private void setWindType(){
         if(state.getMeanWindSpeed() < 30){
-            windIntensity = 0;
-        }
-        if(state.getMeanWindSpeed() >= 30 && state.getMeanWindSpeed() < 55){
             windIntensity = 1;
-        } else if(state.getMeanWindSpeed() >= 55 && state.getMeanWindSpeed() <= 100){
+        } else if(state.getMeanWindSpeed() >= 30 && state.getMeanWindSpeed() < 55){
             windIntensity = 2;
-        } else if(state.getMeanWindSpeed() > 100){
+        } else if(state.getMeanWindSpeed() >= 55 && state.getMeanWindSpeed() <= 100){
             windIntensity = 3;
+        } else if(state.getMeanWindSpeed() > 100){
+            windIntensity = 4;
         }
     }
     //temperature in celcius, 
@@ -79,15 +81,25 @@ public class WeatherType {
     private void setCloudType(){
         cloudIntensity = state.getCloudCover();
         if(cloudIntensity < 2){
-            cloudIntensity = 0;
-        }else if(cloudIntensity >= 2 && cloudIntensity < 4){
             cloudIntensity = 1;
-        }else if(cloudIntensity >= 4 && cloudIntensity < 6){
+        }else if(cloudIntensity >= 2 && cloudIntensity < 4){
             cloudIntensity = 2;
-        }else if(cloudIntensity >= 6 && cloudIntensity < 9){
+        }else if(cloudIntensity >= 4 && cloudIntensity < 6){
             cloudIntensity = 3;
+        }else if(cloudIntensity >= 6 && cloudIntensity < 9){
+            cloudIntensity = 4;
         }
     }
+    
+    public Map<String, String> generateMap(){
+        Map<String, String> map = new HashMap<>();
+        map.put("temperature", Integer.toString(temperatureIntensity));
+        map.put("wind", Integer.toString(windIntensity));
+        map.put("clouds", Integer.toString(cloudIntensity));
+        map.put("percipitation", Integer.toString(precipitationType));
+        return map;
+    }
+    
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

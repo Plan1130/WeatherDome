@@ -42,7 +42,7 @@ public class ArduinoClient {
         }
     }
     
-    String getData(String url) {
+    public String getData(String url) {
         String ret = "";
         
         Request request = new Request.Builder()
