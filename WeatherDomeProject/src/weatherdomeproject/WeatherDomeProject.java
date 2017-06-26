@@ -5,6 +5,8 @@
  */
 package weatherdomeproject;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 
@@ -50,7 +52,28 @@ public class WeatherDomeProject {
         videomanager.getCurrentScene();
         
         videomanager.changeScene("Scene 2ZX");
-               
+        
+        /*
+        * Serious final code below
+        */
+        arduino = new ArduinoClient();
+        
+        while (true) {
+            // GET data
+            String data = arduino.getData(arduinoIP);
+            
+            // Check if changed
+            
+            // If changed: POST new data
+            //             Change video
+            
+            // Sleep for a second
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(WeatherDomeProject.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         //START CLIENT
 //        arduino = new ArduinoClient();
