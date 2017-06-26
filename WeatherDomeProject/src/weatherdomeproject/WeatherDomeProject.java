@@ -19,7 +19,9 @@ public class WeatherDomeProject {
     private static WeatherState current;
     private static WeatherType weather;
     private static ArduinoClient arduino;
+    private static OBSControl videomanager;
     private final static String arduinoIP = "http://192.168.10.10";
+    private final static String obsTxtFile = "C://dome.txt";
     
     /**
      * @param args the command line arguments maar in je reet java
@@ -32,7 +34,7 @@ public class WeatherDomeProject {
         //Eerst data uit de database halen, in dit geval uit 19 januari 1993
         //wat vervolgens in current WeatherState struct wordt opgeslagen
         try {
-            current = twentedb.getWeatherState(2012, 6, 4);
+            current = twentedb.getWeatherState(2015, 7, 2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,6 +44,12 @@ public class WeatherDomeProject {
         weather = new WeatherType(current);
         System.out.println(weather.toString());
         
+        
+        videomanager = new OBSControl(obsTxtFile);
+        
+        videomanager.getCurrentScene();
+        
+        videomanager.changeScene("Scene 2ZX");
                
         
         //START CLIENT
