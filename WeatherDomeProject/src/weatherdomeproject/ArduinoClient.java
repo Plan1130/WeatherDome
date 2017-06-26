@@ -5,6 +5,7 @@
  */
 package weatherdomeproject;
 import java.io.IOException;
+import java.util.Map;
 import okhttp3.*;
 
 
@@ -20,12 +21,14 @@ public class ArduinoClient {
         client = new OkHttpClient();
     }
     
-    public void PostData(String[] data, String url) {
+    public void postData(String url, final Map<String, String> map) {
         //POST DATA
-        RequestBody formBody = new FormBody.Builder()
-        .add(data[0], data[1])
-        .add(data[2], data[3])
-        .build();
+        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+        for (final Map.Entry<String, String> entrySet : map.entrySet()) {
+            formBodyBuilder.add(entrySet.getKey(), entrySet.getValue());
+        }
+        FormBody formBody = formBodyBuilder.build();
+        
         Request request = new Request.Builder()
         .url(url)
         .post(formBody)
@@ -39,7 +42,7 @@ public class ArduinoClient {
         }
     }
     
-    String GetData(String url) {
+    String getData(String url) {
         String ret = "";
         
         Request request = new Request.Builder()
@@ -56,31 +59,3 @@ public class ArduinoClient {
         return ret;
     }
 }
-    
-    
-
-
-
-
-
-
-/*      TESTJEN
-
-        HttpUrl httpurl = new HttpUrl.Builder()
-        .scheme("https")
-        .host("www.google.com")
-        .addPathSegment("search")
-        .addQueryParameter("q", "polar bears")
-        .build();
-        
-        Request r = new Request.Builder()
-        .url(httpurl).build();
-        
-        try {
-            Response response = client.newCall(r).execute();
-            System.out.println( response.body().string() );
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
- 
-*/
