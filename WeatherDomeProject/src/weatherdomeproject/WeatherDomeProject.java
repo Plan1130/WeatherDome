@@ -15,14 +15,12 @@ import java.util.logging.Logger;
  * @author MA NIGGA
  */
 public class WeatherDomeProject {
-    //Databases are located in src/databases
-    private static Database twentedb = new Database("datatwente.csv");
-    //private static WeatherStruct weatherstruct;
-    private static WeatherState currentWeatherState;
-    private static ArduinoClient arduino;
-    private static OBSControl videomanager;
-    private final static String arduinoIP = "http://192.168.10.10";
-    private final static String obsTxtFile = "C://dome.txt";
+    protected static Database twentedb = new Database("datatwente.csv");
+    protected static WeatherState currentWeatherState;
+    protected static ArduinoClient arduino;
+    protected static OBSControl videomanager;
+    protected final static String arduinoIP = "http://192.168.10.10";
+    protected final static String obsTxtFile = "C://dome.txt";
     
     /**
      * @param args the command line arguments maar in je reet java
@@ -30,21 +28,8 @@ public class WeatherDomeProject {
     
     public static void main(String[] args) {
         /*
-        Testjens debugjens sectiones
-        */
-        
-        //TEST MOGELIJKE INPUT VAN ARDUINO
-        String arduinoteststring = "22222season=1234&KANKERSANDERyear=2015234&JEMOEDERmodifier=1234234";
-
-        currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
- 
-        //NOU WAT HEB JIJ GEKREGEN VAN PAPPA??
-        System.out.println(currentWeatherState.toString());
-        
-        
-        /*
         * Serious final code below
-        
+        */
         arduino = new ArduinoClient();
         videomanager = new OBSControl(obsTxtFile);
         String lastArduinoData = "";
@@ -56,8 +41,10 @@ public class WeatherDomeProject {
             
             // Check if changed
             if (!currentArduinoData.equals(lastArduinoData)) {
+                // Save last state fool
+                lastArduinoData = currentArduinoData;
                 // Alter current state
-                currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
+                currentWeatherState = ParseDecider.parseData(currentArduinoData, twentedb);
  
                 // If changed: POST new data
                 //             Change video
@@ -73,6 +60,5 @@ public class WeatherDomeProject {
                 Logger.getLogger(WeatherDomeProject.class.getName()).log(Level.SEVERE, null, ex);
             }
         } 
-*/
     }
 }
