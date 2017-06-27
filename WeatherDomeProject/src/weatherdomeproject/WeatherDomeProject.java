@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 
 /**
- *
+ * The Weatherdome deception
  * @author MA NIGGA
  */
 public class WeatherDomeProject {
@@ -27,6 +27,8 @@ public class WeatherDomeProject {
      */
     
     public static void main(String[] args) {
+        new Debug().test();
+        
         /*
         * Serious final code below
         */
@@ -51,7 +53,6 @@ public class WeatherDomeProject {
                arduino.postData(arduinoIP, currentWeatherState.generateMap());
                videomanager.changeScene("Scene 2");
             }            
-            
             
             // Sleep for a second
             try {
