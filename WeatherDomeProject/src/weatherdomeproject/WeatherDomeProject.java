@@ -51,7 +51,7 @@ public class WeatherDomeProject {
         
         videomanager.getCurrentScene();
         
-        videomanager.changeScene("Scene 2ZX");
+        videomanager.changeScene("Scene 2");
         
         /*
         * Serious final code below
