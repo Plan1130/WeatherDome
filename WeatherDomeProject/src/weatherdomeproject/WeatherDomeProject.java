@@ -18,7 +18,7 @@ public class WeatherDomeProject {
     //Databases are located in src/databases
     private static Database twentedb = new Database("datatwente.csv");
     //private static WeatherStruct weatherstruct;
-    private static WeatherState currWeatherState;
+    private static WeatherState currentWeatherState;
     private static ArduinoClient arduino;
     private static OBSControl videomanager;
     private final static String arduinoIP = "http://192.168.10.10";
@@ -34,41 +34,37 @@ public class WeatherDomeProject {
         */
         
         //TEST MOGELIJKE INPUT VAN ARDUINO
-        String arduinoteststring = "season=2&year=2010&modifier=0";
-        try {
-            currWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String arduinoteststring = "22222season=1234&KANKERSANDERyear=2015234&JEMOEDERmodifier=1234234";
+
+        currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
+ 
         //NOU WAT HEB JIJ GEKREGEN VAN PAPPA??
-        System.out.println(currWeatherState.toString());
-        
-        
-        
-        //CLEANUP NEEDS TO BE DONE:
-        videomanager = new OBSControl(obsTxtFile);
-        
-        videomanager.getCurrentScene();
-        
-        videomanager.changeScene("Scene 2");
-        
+        System.out.println(currentWeatherState.toString());
         
         
         /*
         * Serious final code below
         
         arduino = new ArduinoClient();
+        videomanager = new OBSControl(obsTxtFile);
+        String lastArduinoData = "";
+        String currentArduinoData;
         
         while (true) {
             // GET data
-            String data = arduino.getData(arduinoIP);
+            currentArduinoData = arduino.getData(arduinoIP);
             
             // Check if changed
+            if (!currentArduinoData.equals(lastArduinoData)) {
+                // Alter current state
+                currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
+ 
+                // If changed: POST new data
+                //             Change video
+               arduino.postData(arduinoIP, currentWeatherState.generateMap());
+               videomanager.changeScene("Scene 2");
+            }            
             
-            // Alter current state
-            
-            // If changed: POST new data
-            //             Change video
             
             // Sleep for a second
             try {
@@ -76,13 +72,7 @@ public class WeatherDomeProject {
             } catch (InterruptedException ex) {
                 Logger.getLogger(WeatherDomeProject.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        
-        //START CLIENT
-//        arduino = new ArduinoClient();
-//        String[] data = {"test","5","test2","6"};
-//        arduino.PostData(data,arduinoIP);
-//        arduino.GetData(arduinoIP);
-    */
+        } 
+*/
     }
 }

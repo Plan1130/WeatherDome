@@ -12,20 +12,83 @@ public class ParseDecider {
     static int year;
     static int modifier;
 
-    public static WeatherState parseData(String data, Database db) throws Exception{
+    public static WeatherState parseData(String data, Database db){
+            char[] sander = data.toCharArray();
+            
+            //KLAP YEAR
+            char[] yeararr = {'y','e','a','r','='};
+            char[] yearchar = new char[4];
+            for(int i = 0; i < sander.length; i++) {
+                //Feed Sander Pep $10,-
+                for(int j = 0; j <yeararr.length; j++) {
+                    if (sander[i+j] == yeararr[j]) {
+                        if (j == yeararr.length-1) {
+                            for(int k = 0; k < yearchar.length; k++) {
+                                yearchar[k] = sander[i+j+k+1];
+                            }
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            year = Integer.parseInt(String.valueOf(yearchar));
+            
+            //KLAP SEASON
+            char[] seasonarr = {'s','e','a','s','o','n','='};
+            char[] seasonchar = new char[1];
+            for(int i = 0; i < sander.length; i++) {
+                //Feed Sander Pep $10,-
+                for(int j = 0; j <seasonarr.length; j++) {
+                    if (sander[i+j] == seasonarr[j]) {
+                        if (j == seasonarr.length-1) {
+                            for(int k = 0; k < seasonchar.length; k++) {
+                                seasonchar[k] = sander[i+j+k+1];
+                            }
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            season = Integer.parseInt(String.valueOf(seasonchar));
+            
+            //KLAP MODIFIER
+            char[] modifierarr = {'m','o','d','i','f','i','e','r','='};
+            char[] modifierchar = new char[1];
+            for(int i = 0; i < sander.length; i++) {
+                //Feed Sander Pep $10,-
+                for(int j = 0; j <modifierarr.length; j++) {
+                    if (sander[i+j] == modifierarr[j]) {
+                        if (j == modifierarr.length-1) {
+                            for(int k = 0; k < modifierchar.length; k++) {
+                                modifierchar[k] = sander[i+j+k+1];
+                            }
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            modifier = Integer.parseInt(String.valueOf(modifierchar));
+
+            return makeWeatherState(season,year,modifier,db);
+    }
+        /*
         String[] splitis;
         String[] splitand;
         splitis = data.split("=");
         splitand = data.split("&");
         if (splitis.length == 4 && splitand.length == 3) {
-            season = Integer.parseInt(splitis[1].split("&")[0]);
+            year = Integer.parseInt(splitis[1].split("&")[0]);
             year = Integer.parseInt(splitis[2].split("&")[0]);
             modifier = Integer.parseInt(splitis[3].split("&")[0]);
+            
             return makeWeatherState(season,year,modifier,db);
         } else {
             throw new Exception("Verkeerde data uit die Arduino, mogool");
         }
-    }
+        */
     
     private static WeatherState makeWeatherState(int season, int year, int modifier, Database db) {
         WeatherState weatherstate = null;

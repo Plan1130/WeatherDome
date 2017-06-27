@@ -30,7 +30,7 @@ public class OBSControl {
         String line = null;
         try { 
             FileInputStream reader = new FileInputStream(txtFile);
-            System.out.println("Total file size to read (in bytes) : "+ reader.available());
+            //System.out.println("Total file size to read (in bytes) : "+ reader.available());
 
 			int content;
 			while ((content = reader.read()) != -1) {
