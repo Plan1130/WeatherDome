@@ -18,7 +18,6 @@ public class WeatherDomeProject {
     protected static Database twentedb = new Database("datatwente.csv");
     protected static WeatherState currentWeatherState;
     protected static ArduinoClient arduino;
-    protected static OBSControl videomanager;
     protected final static String arduinoIP = "http://192.168.10.10";
     protected final static String obsTxtFile = "C://dome.txt";
     
@@ -33,7 +32,7 @@ public class WeatherDomeProject {
         * Serious final code below
         */
         arduino = new ArduinoClient();
-        videomanager = new OBSControl(obsTxtFile);
+        SceneSelector videomanager = new SceneSelector(obsTxtFile);
         String lastArduinoData = "";
         String currentArduinoData;
         
