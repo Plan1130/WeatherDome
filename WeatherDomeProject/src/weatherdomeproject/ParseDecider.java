@@ -74,21 +74,6 @@ public class ParseDecider {
 
             return makeWeatherState(season,year,modifier,db);
     }
-        /*
-        String[] splitis;
-        String[] splitand;
-        splitis = data.split("=");
-        splitand = data.split("&");
-        if (splitis.length == 4 && splitand.length == 3) {
-            year = Integer.parseInt(splitis[1].split("&")[0]);
-            year = Integer.parseInt(splitis[2].split("&")[0]);
-            modifier = Integer.parseInt(splitis[3].split("&")[0]);
-            
-            return makeWeatherState(season,year,modifier,db);
-        } else {
-            throw new Exception("Verkeerde data uit die Arduino, mogool");
-        }
-        */
     
     private static WeatherState makeWeatherState(int season, int year, int modifier, Database db) {
         WeatherState weatherstate = null;
