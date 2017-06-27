@@ -1,153 +1,148 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * WeatherDome!
  */
 package weatherdomeproject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
- * @author Sander
+ * @author MAX 'imaal' G
  */
-
 public class WeatherState {
-    public static final int VOID = Integer.MIN_VALUE;
+    private WeatherStruct state;
+    private Future future;
+
     
-    private final int windDirection;
-    private final int vectorWindSpeed;
-    private final int meanWindSpeed;
-    private final int meanTemperature;
-    private final int minTemperature;
-    private final int maxTemperature;
-    private final int sunDuration;
-    private final int sunPercentage;
-    private final int globalRadiation;
-    private final int percipitationDuration;
-    private final int percipitationAmount;
-    private final int minVisibility;
-    private final int maxVisibility;
-    private final int cloudCover;
-    private final int humidity;
+    int temperatureIntensity;
+    int windIntensity;
+    int cloudIntensity;
+    int precipitationType;
     
-    public WeatherState(int windDirection, int vectorWindSpeed, int meanWindSpeed, int meanTemperature, int minTemperature, int maxTemperature, int sunDuration, int sunPercentage, int globalRadiation, int percipitationDuration, int percipitationAmount, int minVisibility, int maxVisibility, int cloudCover, int humidity) {
-        this.windDirection = windDirection;
-        this.vectorWindSpeed = vectorWindSpeed;
-        this.meanWindSpeed = meanWindSpeed;
-        this.meanTemperature = meanTemperature;
-        this.minTemperature = minTemperature;
-        this.maxTemperature = maxTemperature;
-        this.sunDuration = sunDuration;
-        this.sunPercentage = sunPercentage;
-        this.globalRadiation = globalRadiation;
-        this.percipitationDuration = percipitationDuration;
-        this.percipitationAmount = percipitationAmount;
-        this.minVisibility = minVisibility;
-        this.maxVisibility = maxVisibility;
-        this.cloudCover = cloudCover;
-        this.humidity = humidity;
+    public WeatherState(WeatherStruct state) {
+        this.state = state;
+        this.setPastValues();
     }
     
-    public int getWindDirection() {
-        if (windDirection == VOID);
-        return windDirection;
+    public WeatherState(Future future) {
+        this.future = future;
+        this.setFutureValues();
     }
     
-    public int getVectorWindSpeed() {
-        if (vectorWindSpeed == VOID);
-        return vectorWindSpeed;
+    private void setPastValues() {
+        setPrecipitationType();
+        setWindType();
+        setTemperatureType();
+        setCloudType();
     }
     
-    public int getMeanWindSpeed() {
-        if (meanWindSpeed == VOID);
-        return meanWindSpeed;
+    private void setFutureValues() {
+        switch(future.getModifier()) {
+            case 0: //NO CHANGE
+                temperatureIntensity = 40;
+                windIntensity = 3;
+                cloudIntensity = 3;
+                precipitationType = 2;
+                break;
+            case 1: //NO MEAT
+                temperatureIntensity = 0;
+                windIntensity = 2;
+                cloudIntensity = 1;
+                precipitationType = 3;
+                break;
+            case 2: //NUCLEAR WINTER
+                temperatureIntensity = 10;
+                windIntensity = 0;
+                cloudIntensity = 0;
+                precipitationType = 0;
+                break;
+            case 3: //NO FOSSIL FUEL
+                temperatureIntensity = 20;
+                windIntensity = 3;
+                cloudIntensity = 3;
+                precipitationType = 1;
+                break;
+        }
+    }
+    //type of rain: 0: no rain. 1: rain. 2: thunder. 3: snow.
+    private void setPrecipitationType(){
+        boolean isFreezing = false;
+        boolean isRaining = false;
+        boolean isThunder = false;
+        
+        if(state.getMinTemperature() < 1){
+            isFreezing = true;
+        }
+        if(state.getPercipitationAmount() > 50){
+            isRaining = true;
+        }
+        if(state.getMaxTemperature() > 250 && state.getPercipitationAmount() > 50){
+            isThunder = true;
+        }
+        
+        if(!isRaining){
+            precipitationType = 0; //no rain
+        }
+        if(isRaining && !isFreezing && !isThunder){
+            precipitationType = 1; //is rain
+        }
+        if(isThunder){
+            precipitationType = 2; //is thunder
+        }
+        if(isRaining && isFreezing && !isThunder){
+            precipitationType = 3; //is snowing
+        }
+    }
+    //wind speed in 4 levels
+    private void setWindType(){
+        if(state.getMeanWindSpeed() < 30){
+            windIntensity = 0;
+        } else if(state.getMeanWindSpeed() >= 30 && state.getMeanWindSpeed() < 55){
+            windIntensity = 1;
+        } else if(state.getMeanWindSpeed() >= 55 && state.getMeanWindSpeed() <= 100){
+            windIntensity = 2;
+        } else if(state.getMeanWindSpeed() > 100){
+            windIntensity = 3;
+        }
+    }
+    //temperature in celcius, 
+    private void setTemperatureType(){
+        temperatureIntensity = (state.getMeanTemperature()/10);
     }
     
-    public int getMeanTemperature() {
-        if (meanTemperature == VOID);
-        return meanTemperature;
+    //cloud amount in levels of 4
+    private void setCloudType(){
+        cloudIntensity = state.getCloudCover();
+        if(cloudIntensity < 2){
+            cloudIntensity = 0;
+        }else if(cloudIntensity >= 2 && cloudIntensity < 4){
+            cloudIntensity = 1;
+        }else if(cloudIntensity >= 4 && cloudIntensity < 6){
+            cloudIntensity = 2;
+        }else if(cloudIntensity >= 6 && cloudIntensity < 9){
+            cloudIntensity = 3;
+        }
     }
     
-    public int getMinTemperature() {
-        if (minTemperature == VOID);
-        return minTemperature;
-    }
-
-    public int getMaxTemperature() {
-        if (maxTemperature == VOID);
-        return maxTemperature;
-    }
-
-    public int getSunDuration() {
-        if (sunDuration == VOID);
-        return sunDuration;
-    }
-
-    public int getSunPercentage() {
-        if (sunPercentage == VOID);
-        return sunPercentage;
-    }
-
-    public int getGlobalRadiation() {
-        if (globalRadiation == VOID);
-        return globalRadiation;
-    }
-
-    public int getPercipitationDuration() {
-        if (percipitationDuration == VOID);
-        return percipitationDuration;
-    }
-
-    public int getPercipitationAmount() {
-        if (percipitationAmount == VOID);
-        return percipitationAmount;
-    }
-
-    public int getMinVisibility() {
-        if (minVisibility == VOID);
-        return minVisibility;
-    }
-
-    public int getMaxVisibility() {
-        if (maxVisibility == VOID);
-        return maxVisibility;
-    }
-
-    public int getCloudCover() {
-        if (cloudCover == VOID);
-        return cloudCover;
-    }
-
-    public int getHumidity() {
-        if (humidity == VOID);
-        return humidity;
+    public Map<String, String> generateMap(){
+        Map<String, String> map = new HashMap<>();
+        map.put("temperature", Integer.toString(temperatureIntensity));
+        map.put("wind", Integer.toString(windIntensity));
+        map.put("clouds", Integer.toString(cloudIntensity));
+        map.put("percipitation", Integer.toString(precipitationType));
+        return map;
     }
     
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("WeatherState Summary: \n");
-        builder.append("windDirection = " + windDirection + " | ");
-        builder.append("vectorWindSpeed = " + vectorWindSpeed + " | ");
-        builder.append("meanWindSpeed = " + meanWindSpeed + " | ");
-        builder.append("meanTemperature = " + meanTemperature + " | ");
-        builder.append("minTemperature = " + minTemperature + " | ");
-        builder.append("maxTemperature = " + maxTemperature + " | ");
-        builder.append("sunDuration = " + sunDuration + " | \n");
-        builder.append("sunPercentage = " + sunPercentage + " | ");
-        builder.append("globalRadiation = " + globalRadiation + " | ");
-        builder.append("percipitationDuration = " + percipitationDuration + " | ");
-        builder.append("percipitationAmount = " + percipitationAmount + " | ");
-        builder.append("minVisibility = " + minVisibility + " | \n");
-        builder.append("maxVisibility = " + maxVisibility + " | ");
-        builder.append("cloudCover = " + cloudCover + " | ");
-        builder.append("humidity = " + humidity + " | ");
+        builder.append("\nTemperature Intensity: " + temperatureIntensity);
+        builder.append("\nWind Intensity: " + windIntensity);
+        builder.append("\nCloud Intensity: " + cloudIntensity);
+        builder.append("\nPrecipitation Type: " + precipitationType); //TODO: ADD TEXTUAL TYPE OUTPUT
         return builder.toString().replaceAll("-2147483648", "NULL");
-    }
-    
-    public static class ValueNotFoundException extends Exception {
-        public ValueNotFoundException(){
-            super("Value not defined in database");
-        }
     }
     
 }
