@@ -41,7 +41,7 @@ public class Database {
         }
     }
     
-    public WeatherStruct getWeatherStruct(int year, int month, int day) throws Exception {
+    public WeatherDatabaseStruct getWeatherStruct(int year, int month, int day) throws Exception {
         //Parse YYYYMMDD
         StringBuilder builder = new StringBuilder();
         //YYYY
@@ -84,14 +84,14 @@ public class Database {
             
             for (String s : foundData) {
                 if (s.equals("     ")) {
-                    editData.add(WeatherStruct.VOID);
+                    editData.add(WeatherDatabaseStruct.VOID);
                 } else {
                     editData.add(Integer.parseInt(s));
                 }                
             }
             
             
-            return new WeatherStruct(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
+            return new WeatherDatabaseStruct(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
                     , editData.get(6), editData.get(7), editData.get(8), editData.get(9), editData.get(10), editData.get(11)
                     , editData.get(12), editData.get(13), editData.get(14), editData.get(15));
             

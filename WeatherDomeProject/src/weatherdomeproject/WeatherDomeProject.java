@@ -50,7 +50,7 @@ public class WeatherDomeProject {
                 // If changed: POST new data
                 //             Change video
                arduino.postData(arduinoIP, currentWeatherState.generateMap());
-               videomanager.changeScene("Scene 2");
+               videomanager.changeScene(currentWeatherState);
             }            
             
             // Sleep for a second

@@ -14,15 +14,18 @@ public class Debug extends WeatherDomeProject {
         */
         
         //TEST MOGELIJKE INPUT VAN ARDUINO
-        String arduinoteststring = "22222season=1234&KRKERSANDERyear=2015234&JEMOEDERmodifier=1234234";
+        String arduinoteststring = "season=0&modifier=3&year=2016";
 
         currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
- 
-        //NOU WAT HEB JIJ GEKREGEN VAN PAPPA??
-        log(currentWeatherState.toString());
+        
+        SceneSelector videomanager = new SceneSelector(obsTxtFile);
+        
+        videomanager.changeScene(currentWeatherState);
+        
+        System.exit(0);
     }
     
-    void log(String text) {
+    static void log(String text) {
         System.out.println(text);
     }
 }

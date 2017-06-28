@@ -8,76 +8,89 @@ import java.util.Map;
 
 /**
  *
- * @author MAX 'imaal' G
+ * @author FlorianF
  */
-public class WeatherState {
-    private WeatherStruct state;
-    private Future future;
+public abstract class WeatherState {
+    protected int temperatureIntensity; 
+    protected int windIntensity;
+    protected int cloudIntensity; //LED AANGESTUURD DOOR DEZE XXX CHRIS VERMAAS
+    protected int precipitationType;
+    protected int season;
+    protected int modifier;
+    
+    public int getTempIntensity() {
+        return temperatureIntensity;
+    }
+    
+    public int getWindIntensity() {
+        return windIntensity;
+    }
+    
+    public int cloudIntensity() {
+        return cloudIntensity;
+    }
+    
+    public int getPrecipitation() {
+        return precipitationType;
+    }
+    
+    public int getSeason() {
+        return season;
+    }
+    
+    public int getModifier() {
+        return modifier;
+    }
+    
+    public String getTime() {
+        return "Base";
+    }
+    
+    public Map<String, String> generateMap(){
+        Map<String, String> map = new HashMap<>();
+        map.put("temperature", Integer.toString(temperatureIntensity));
+        map.put("wind", Integer.toString(windIntensity));
+        map.put("clouds", Integer.toString(cloudIntensity));
+        map.put("percipitation", Integer.toString(precipitationType));
+        return map;
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("\nWeatherState Summary: \n");
+        builder.append("Temperature Intensity: " + temperatureIntensity);
+        builder.append("\nWind Intensity: " + windIntensity);
+        builder.append("\nCloud Intensity: " + cloudIntensity);
+        builder.append("\nPrecipitation Type: " + precipitationType);
+        builder.append("\nSeason: " + season);
+        builder.append("\nModifier: " + modifier);
+        builder.append("\nTime Occurance: " + getClass());
+        return builder.toString();
+        //TODO: ADD TEXTUAL TYPE OUTPUT
+    }
+}
 
-    
-    int temperatureIntensity;
-    int windIntensity;
-    int cloudIntensity;
-    int precipitationType;
-    
-    public WeatherState(WeatherStruct state) {
-        this.state = state;
-        this.setPastValues();
+class HistoryWeatherState extends WeatherState {
+    HistoryWeatherState(WeatherDatabaseStruct weatherstruct, int season) {
+        super.season = season;
+        determineWeather(weatherstruct);
     }
     
-    public WeatherState(Future future) {
-        this.future = future;
-        this.setFutureValues();
-    }
-    
-    private void setPastValues() {
-        setPrecipitationType();
-        setWindType();
-        setTemperatureType();
-        setCloudType();
-    }
-    
-    private void setFutureValues() {
-        switch(future.getModifier()) {
-            case 0: //NO CHANGE
-                temperatureIntensity = 40;
-                windIntensity = 3;
-                cloudIntensity = 3;
-                precipitationType = 2;
-                break;
-            case 1: //NO MEAT
-                temperatureIntensity = 0;
-                windIntensity = 2;
-                cloudIntensity = 1;
-                precipitationType = 3;
-                break;
-            case 2: //NUCLEAR WINTER
-                temperatureIntensity = 10;
-                windIntensity = 0;
-                cloudIntensity = 0;
-                precipitationType = 0;
-                break;
-            case 3: //NO FOSSIL FUEL
-                temperatureIntensity = 20;
-                windIntensity = 3;
-                cloudIntensity = 3;
-                precipitationType = 1;
-                break;
-        }
-    }
-    //type of rain: 0: no rain. 1: rain. 2: thunder. 3: snow.
-    private void setPrecipitationType(){
+    private void determineWeather(WeatherDatabaseStruct struct) {
+        //type of rain: 0: no rain. 1: rain. 2: thunder. 3: snow.
         boolean isFreezing = false;
         boolean isRaining = false;
         boolean isThunder = false;
         
-        if(state.getMinTemperature() < 1){
+        if(struct.getMinTemperature() < 1){
             isFreezing = true;
         }
-        if(state.getPercipitationAmount() > 50){
+        if(struct.getPercipitationAmount() > 50){
             isRaining = true;
         }
-        if(state.getMaxTemperature() > 250 && state.getPercipitationAmount() > 50){
+        if(struct.getMaxTemperature() > 200 && struct.getPercipitationAmount() > 50){
+            Debug.log("ONWEER!!!!");
             isThunder = true;
         }
         
@@ -93,27 +106,23 @@ public class WeatherState {
         if(isRaining && isFreezing && !isThunder){
             precipitationType = 3; //is snowing
         }
-    }
-    //wind speed in 4 levels
-    private void setWindType(){
-        if(state.getMeanWindSpeed() < 30){
+
+        //wind speed in 4 levels
+        if(struct.getMeanWindSpeed() < 30){
             windIntensity = 0;
-        } else if(state.getMeanWindSpeed() >= 30 && state.getMeanWindSpeed() < 55){
+        } else if(struct.getMeanWindSpeed() >= 30 && struct.getMeanWindSpeed() < 55){
             windIntensity = 1;
-        } else if(state.getMeanWindSpeed() >= 55 && state.getMeanWindSpeed() <= 100){
+        } else if(struct.getMeanWindSpeed() >= 55 && struct.getMeanWindSpeed() <= 100){
             windIntensity = 2;
-        } else if(state.getMeanWindSpeed() > 100){
+        } else if(struct.getMeanWindSpeed() > 100){
             windIntensity = 3;
         }
-    }
-    //temperature in celcius, 
-    private void setTemperatureType(){
-        temperatureIntensity = (state.getMeanTemperature()/10);
-    }
+
+        //temperature in celcius, 
+        temperatureIntensity = (struct.getMeanTemperature()/10);
     
-    //cloud amount in levels of 4
-    private void setCloudType(){
-        cloudIntensity = state.getCloudCover();
+        //cloud amount in levels of 4
+        cloudIntensity = struct.getCloudCover();
         if(cloudIntensity < 2){
             cloudIntensity = 0;
         }else if(cloudIntensity >= 2 && cloudIntensity < 4){
@@ -125,24 +134,49 @@ public class WeatherState {
         }
     }
     
-    public Map<String, String> generateMap(){
-        Map<String, String> map = new HashMap<>();
-        map.put("temperature", Integer.toString(temperatureIntensity));
-        map.put("wind", Integer.toString(windIntensity));
-        map.put("clouds", Integer.toString(cloudIntensity));
-        map.put("percipitation", Integer.toString(precipitationType));
-        return map;
-    }
-    
     @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("WeatherState Summary: \n");
-        builder.append("\nTemperature Intensity: " + temperatureIntensity);
-        builder.append("\nWind Intensity: " + windIntensity);
-        builder.append("\nCloud Intensity: " + cloudIntensity);
-        builder.append("\nPrecipitation Type: " + precipitationType); //TODO: ADD TEXTUAL TYPE OUTPUT
-        return builder.toString().replaceAll("-2147483648", "NULL");
+    public String getTime() {
+        return "History";
+    }
+}
+
+class FutureWeatherState extends WeatherState {
+    FutureWeatherState(int modifier, int season) {
+        super.modifier = modifier;
+        super.season = season;
+        determineWeather(modifier);
     }
     
+    private void determineWeather(int modifier) {
+        switch(modifier) {
+            case 0: //NO CHANGE
+                super.temperatureIntensity = 40;
+                super.windIntensity = 3;
+                super.cloudIntensity = 3;
+                super.precipitationType = 2;
+                break;
+            case 1: //NO MEAT
+                super.temperatureIntensity = 0;
+                super.windIntensity = 2;
+                super.cloudIntensity = 1;
+                super.precipitationType = 3;
+                break;
+            case 2: //NUCLEAR WINTER
+                super.temperatureIntensity = 10;
+                super.windIntensity = 0;
+                super.cloudIntensity = 0;
+                super.precipitationType = 0;
+                break;
+            case 3: //NO FOSSIL FUEL
+                super.temperatureIntensity = 20;
+                super.windIntensity = 3;
+                super.cloudIntensity = 3;
+                super.precipitationType = 1;
+                break;
+        }
+    }
+    @Override
+    public String getTime() {
+        return "Future";
+    }
 }

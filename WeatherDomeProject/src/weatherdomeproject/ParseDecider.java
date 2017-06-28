@@ -80,7 +80,7 @@ public class ParseDecider {
         //THE PAST
         if ((year == 2017 && season == 0) || (year <= 2016)) {
             //Maak een weatherstruct
-            WeatherStruct weatherstruct;
+            WeatherDatabaseStruct weatherstruct;
             //Kies maand en dag
             int month = 0;
             int day = 0;
@@ -104,13 +104,13 @@ public class ParseDecider {
             }
             try {
                 weatherstruct = db.getWeatherStruct(year, month, day);
-                weatherstate = new WeatherState(weatherstruct);
+                weatherstate = new HistoryWeatherState(weatherstruct,season);
             } catch(Exception e) {
                 e.printStackTrace();
             }
         } else { //THE FUTURE
-            Future futurestruct = new Future(season, modifier);
-            weatherstate = new WeatherState(futurestruct);
+            
+            weatherstate = new FutureWeatherState(modifier, season);
         }
         return weatherstate;
     }

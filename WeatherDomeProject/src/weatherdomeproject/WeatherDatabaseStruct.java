@@ -10,7 +10,7 @@ package weatherdomeproject;
  * @author Sander
  */
 
-public class WeatherStruct {
+public class WeatherDatabaseStruct {
     public static final int VOID = Integer.MIN_VALUE;
     
     private final int windDirection;
@@ -29,7 +29,7 @@ public class WeatherStruct {
     private final int cloudCover;
     private final int humidity;
     
-    public WeatherStruct(int windDirection, int vectorWindSpeed, int meanWindSpeed, int meanTemperature, int minTemperature, int maxTemperature, int sunDuration, int sunPercentage, int globalRadiation, int percipitationDuration, int percipitationAmount, int minVisibility, int maxVisibility, int cloudCover, int humidity) {
+    public WeatherDatabaseStruct(int windDirection, int vectorWindSpeed, int meanWindSpeed, int meanTemperature, int minTemperature, int maxTemperature, int sunDuration, int sunPercentage, int globalRadiation, int percipitationDuration, int percipitationAmount, int minVisibility, int maxVisibility, int cloudCover, int humidity) {
         this.windDirection = windDirection;
         this.vectorWindSpeed = vectorWindSpeed;
         this.meanWindSpeed = meanWindSpeed;
@@ -142,12 +142,5 @@ public class WeatherStruct {
         builder.append("cloudCover = " + cloudCover + " | ");
         builder.append("humidity = " + humidity + " | ");
         return builder.toString().replaceAll("-2147483648", "NULL");
-    }
-    
-    public static class ValueNotFoundException extends Exception {
-        public ValueNotFoundException(){
-            super("Value not defined in database");
-        }
-    }
-    
+    }    
 }
