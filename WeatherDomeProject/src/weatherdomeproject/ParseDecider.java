@@ -12,7 +12,8 @@ public class ParseDecider {
     static int year;
     static int modifier;
 
-    public static WeatherState parseData(String data, Database db){
+    public static WeatherState parseData(String data, Database db) throws Exception{
+        if (!data.isEmpty() && data.length() > 4) {
             char[] sander = data.toCharArray();
             
             //KLAP YEAR
@@ -73,6 +74,9 @@ public class ParseDecider {
             modifier = Integer.parseInt(String.valueOf(modifierchar));
 
             return makeWeatherState(season,year,modifier,db);
+        } else {
+            throw new Exception("Lege of verkeerde string ontvangen!");
+        }
     }
     
     private static WeatherState makeWeatherState(int season, int year, int modifier, Database db) {

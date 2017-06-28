@@ -26,7 +26,7 @@ public class WeatherDomeProject {
      */
     
     public static void main(String[] args) {
-        new Debug().test();
+        //new Debug().test();
         
         /*
         * Serious final code below
@@ -45,7 +45,11 @@ public class WeatherDomeProject {
                 // Save last state fool
                 lastArduinoData = currentArduinoData;
                 // Alter current state
-                currentWeatherState = ParseDecider.parseData(currentArduinoData, twentedb);
+                try {
+                    currentWeatherState = ParseDecider.parseData(currentArduinoData, twentedb);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
  
                 // If changed: POST new data
                 //             Change video
