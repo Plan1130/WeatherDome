@@ -14,7 +14,7 @@ public class Debug extends WeatherDomeProject {
         */
         
         //TEST MOGELIJKE INPUT VAN ARDUINO
-        String arduinoteststring = "year=2015season=1modifier=1";
+        String arduinoteststring = "year=2015&season=1&modifier=0";
 
         try {
             currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);

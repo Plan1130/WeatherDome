@@ -26,6 +26,7 @@ public class ArduinoClient {
         FormBody.Builder formBodyBuilder = new FormBody.Builder();
         for (final Map.Entry<String, String> entrySet : map.entrySet()) {
             formBodyBuilder.add(entrySet.getKey(), entrySet.getValue());
+            Debug.log(entrySet.getKey() + ", " + entrySet.getValue());
         }
         FormBody formBody = formBodyBuilder.build();
         
