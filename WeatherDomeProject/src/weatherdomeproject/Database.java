@@ -78,8 +78,10 @@ public class Database {
                 String date = readArr[0];
                 Debug.log(date);
                 char[] datearr = date.toCharArray();
+                char[] year = {datearr[0], datearr[1], datearr[2], datearr[3]};
                 char[] month = {datearr[5], datearr[6]};
                 char[] day = {datearr[6], datearr[7]};
+                int jaar = Integer.parseInt(new String(year));
                 int maand = Integer.parseInt(new String(month));
                 int dag = Integer.parseInt(new String(day));
                 
@@ -94,13 +96,16 @@ public class Database {
                 } else if (maand <= 11 || (maand == 12 && dag < 21)) {
                     season = 3;
                 }
-                
-                Debug.log(season + "");
 
                 selector.changeScene(new HistoryWeatherState(new WeatherDatabaseStruct(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
                         , editData.get(6), editData.get(7), editData.get(8), editData.get(9), editData.get(10), editData.get(11)
                         , editData.get(12), editData.get(13), editData.get(14), editData.get(15)),season));
-
+                
+                Debug.log("########################################################################" 
+                        + "\nThe current day is : " + dag + " of month " + maand + " from the year " + jaar 
+                        + "\nSeason is : " + season + "\n"
+                        + "########################################################################");
+                
                 try {
                     Thread.sleep(2500);
                 } catch (InterruptedException ex) {
