@@ -34,6 +34,22 @@ public class Debug extends WeatherDomeProject {
             e.printStackTrace();
         }
         
+        arduinoteststring = "year=2978season=1modifier=1";
+
+        try {
+            currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        arduinoteststring = "year=2978season=2modifier=3";
+
+        try {
+            currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
         
         videomanager.changeScene(currentWeatherState);
         

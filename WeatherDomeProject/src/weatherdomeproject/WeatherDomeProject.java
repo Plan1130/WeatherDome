@@ -26,7 +26,7 @@ public class WeatherDomeProject {
      */
     
     public static void main(String[] args) {
-        new Debug().test();
+        //new Debug().test();
         
         /*
         * Serious final code below
