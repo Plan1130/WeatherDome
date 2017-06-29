@@ -26,6 +26,8 @@ public class Debug extends WeatherDomeProject {
         
         videomanager.changeScene(currentWeatherState);
         
+        twentedb.stressTest();
+        
         System.exit(0);
     }
     
