@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * GITHUB
@@ -38,6 +40,52 @@ public class Database {
             totaldays = countLines(databasename);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public void stressTest() {
+        //Seek and destroy
+        String read;
+        String[] readArr;
+        String[] foundData = null;
+        
+        BufferedReader reader = new BufferedReader(filereader);
+        
+        SceneSelector selector = new SceneSelector("C://dome.txt");
+        
+        for(int index = 0; index < totaldays; index++) {
+            read = "";
+            try {
+                read = reader.readLine();
+            } catch(Exception e) {
+                
+            }
+            if (!read.equals("")) {
+                readArr = read.split(",");
+                List<Integer> editData = new ArrayList<>();
+                foundData = readArr;
+
+                for (String s : foundData) {
+                    Debug.log(s);
+                    if (s.equals("     ")) {
+                        editData.add(WeatherDatabaseStruct.VOID);
+                    } else {
+                        editData.add(Integer.parseInt(s));
+                    }                
+                }
+
+                selector.changeScene(new HistoryWeatherState(new WeatherDatabaseStruct(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
+                        , editData.get(6), editData.get(7), editData.get(8), editData.get(9), editData.get(10), editData.get(11)
+                        , editData.get(12), editData.get(13), editData.get(14), editData.get(15)),1));
+
+                try {
+                    Thread.sleep(2500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(WeatherDomeProject.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                Debug.log("No data in this line");
+            }
         }
     }
     
