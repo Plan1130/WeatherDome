@@ -79,7 +79,7 @@ public class Database {
                 Debug.log(date);
                 char[] datearr = date.toCharArray();
                 char[] year = {datearr[0], datearr[1], datearr[2], datearr[3]};
-                char[] month = {datearr[5], datearr[6]};
+                char[] month = {datearr[4], datearr[5]};
                 char[] day = {datearr[6], datearr[7]};
                 int jaar = Integer.parseInt(new String(year));
                 int maand = Integer.parseInt(new String(month));
