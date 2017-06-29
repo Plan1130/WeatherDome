@@ -52,9 +52,9 @@ public abstract class Scene {
 }
 
 class HistoryScene extends Scene {
-    public HistoryScene(String scenename, int cloud, int precipitation, int season) {
+    public HistoryScene(String scenename, int clouds, int precipitation, int season) {
         super.scenename = scenename;
-        super.clouds = cloud;
+        super.clouds = clouds;
         super.precipitation = precipitation;
         super.season = season;
     }

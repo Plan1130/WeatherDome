@@ -23,15 +23,15 @@ public class SceneSelector {
         
         for (int i = 0; i < scenes.length ; i++) {
            // Debug.log(weather.getTime() + " EN DE SCENE CLASS " + scene.getTime());
-            if (weather.getTime().equals(scenes[i].getTime()) && weather.cloudIntensity()== scenes[i].getClouds() &&
+            if (weather.getTime().equals(scenes[i].getTime()) && weather.getTime().equals("History") && weather.cloudIntensity()== scenes[i].getClouds() &&
                     weather.getPrecipitation() == scenes[i].getPrecipitation() &&
                     weather.getSeason() == scenes[i].getSeason()) {
                 obscontrol.changeScene("Scene "+i); //FOUND CHANGE SCENE
-                Debug.log("Found HISTORY scene: \n" + scenes[i].toString() + "\nCorresponding to weatherstate: \n" + weather.toString());
+                Debug.log("Found HISTORY scene:" + scenes[i].toString() + "\nCorresponding to weatherstate: \n" + weather.toString());
                 break;
-            } else if (weather.getTime().equals(scenes[i].getTime()) && weather.getModifier() == scenes[i].getModifier() && weather.getSeason() == scenes[i].getSeason()) {
+            } else if (weather.getTime().equals(scenes[i].getTime()) && weather.getTime().equals("Future") && weather.getModifier() == scenes[i].getModifier() && weather.getSeason() == scenes[i].getSeason()) {
                 obscontrol.changeScene("Scene "+i); //FOUND CHANGE SCENE
-                Debug.log("Found FUTURE scene: \n" + scenes[i].toString() + "\nCorresponding to weatherstate: \n" + weather.toString());
+                Debug.log("Found FUTURE scene:" + scenes[i].toString() + "\nCorresponding to weatherstate: \n" + weather.toString());
                 break;
             }
         }
