@@ -43,11 +43,109 @@ public class Database {
         }
     }
     
+    
+    public WeatherDatabaseStruct getWeatherStruct(int year, int month, int day) throws Exception {
+        //Parse YYYYMMDD
+        StringBuilder builder = new StringBuilder();
+        //YYYY
+        builder.append(year);
+        //MM
+        if (month < 10) {
+            builder.append(0);
+            builder.append(month);
+        } else {
+            builder.append(month);
+        }
+        //DD
+        if (day < 10) {
+            builder.append(0);
+            builder.append(day);
+        } else {
+            builder.append(day);
+        }
+        int dateToFind = Integer.parseInt(builder.toString());
+        
+        //Seek and destroy
+        String read;
+        String[] readArr;
+        String[] foundData = null;
+        
+        //BUG FIX:
+        try {
+            filereader = new FileReader(databasename);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
+        BufferedReader reader = new BufferedReader(filereader);
+        
+        for(int index = 0; index < totaldays; index++) {
+            read = reader.readLine();
+            readArr = read.split(",");
+            if (Integer.parseInt(readArr[0]) == dateToFind) {
+                //Found date
+                foundData = readArr;
+                break; //dubbelop
+            }
+        }
+        
+        if(foundData != null) {
+            List<Integer> editData = new ArrayList<>();
+            
+            for (String s : foundData) {
+                if (s.equals("     ")) {
+                    editData.add(WeatherDatabaseStruct.VOID);
+                } else {
+                    editData.add(Integer.parseInt(s));
+                }                
+            }
+            
+            
+            return new WeatherDatabaseStruct(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
+                    , editData.get(6), editData.get(7), editData.get(8), editData.get(9), editData.get(10), editData.get(11)
+                    , editData.get(12), editData.get(13), editData.get(14), editData.get(15));
+            
+        } else {
+            throw new Exception("wtf denken jij");
+        }        
+    }
+    
+    
+    public static int countLines(String filename) throws IOException {
+        InputStream is = new BufferedInputStream(new FileInputStream(filename));
+        try {
+            byte[] c = new byte[1024];
+            int count = 0;
+            int readChars = 0;
+            boolean empty = true;
+            while ((readChars = is.read(c)) != -1) {
+                empty = false;
+                for (int i = 0; i < readChars; ++i) {
+                    if (c[i] == '\n') {
+                        ++count;
+                    }
+                }
+            }
+            return (count == 0 && !empty) ? 1 : count;
+        } finally {
+            is.close();
+        }
+    }
+    
+    
+    
     public void stressTest() {
         //Seek and destroy
         String read;
         String[] readArr;
         String[] foundData = null;
+        try {
+            filereader = new FileReader(databasename);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         
         BufferedReader reader = new BufferedReader(filereader);
         
@@ -60,6 +158,7 @@ public class Database {
             } catch(Exception e) {
                 
             }
+            Debug.log(read);
             if (!read.equals("")) {
                 readArr = read.split(",");
                 List<Integer> editData = new ArrayList<>();
@@ -116,85 +215,4 @@ public class Database {
             }
         }
     }
-    
-    public WeatherDatabaseStruct getWeatherStruct(int year, int month, int day) throws Exception {
-        //Parse YYYYMMDD
-        StringBuilder builder = new StringBuilder();
-        //YYYY
-        builder.append(year);
-        //MM
-        if (month < 10) {
-            builder.append(0);
-            builder.append(month);
-        } else {
-            builder.append(month);
-        }
-        //DD
-        if (day < 10) {
-            builder.append(0);
-            builder.append(day);
-        } else {
-            builder.append(day);
-        }
-        int dateToFind = Integer.parseInt(builder.toString());
-        
-        //Seek and destroy
-        String read;
-        String[] readArr;
-        String[] foundData = null;
-        
-        BufferedReader reader = new BufferedReader(filereader);
-        
-        for(int index = 0; index < totaldays; index++) {
-            read = reader.readLine();
-            readArr = read.split(",");
-            if (Integer.parseInt(readArr[0]) == dateToFind) {
-                //Found date
-                foundData = readArr;
-                break; //dubbelop
-            }
-        }
-        
-        if(foundData != null) {
-            List<Integer> editData = new ArrayList<>();
-            
-            for (String s : foundData) {
-                if (s.equals("     ")) {
-                    editData.add(WeatherDatabaseStruct.VOID);
-                } else {
-                    editData.add(Integer.parseInt(s));
-                }                
-            }
-            
-            
-            return new WeatherDatabaseStruct(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
-                    , editData.get(6), editData.get(7), editData.get(8), editData.get(9), editData.get(10), editData.get(11)
-                    , editData.get(12), editData.get(13), editData.get(14), editData.get(15));
-            
-        } else {
-            throw new Exception("wtf denken jij");
-        }        
-    }
-    
-    
-    public static int countLines(String filename) throws IOException {
-    InputStream is = new BufferedInputStream(new FileInputStream(filename));
-    try {
-        byte[] c = new byte[1024];
-        int count = 0;
-        int readChars = 0;
-        boolean empty = true;
-        while ((readChars = is.read(c)) != -1) {
-            empty = false;
-            for (int i = 0; i < readChars; ++i) {
-                if (c[i] == '\n') {
-                    ++count;
-                }
-            }
-        }
-        return (count == 0 && !empty) ? 1 : count;
-    } finally {
-        is.close();
-    }
-}
 }
