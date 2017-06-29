@@ -15,7 +15,7 @@ public class Debug extends WeatherDomeProject {
         SceneSelector videomanager = new SceneSelector(obsTxtFile);
         
         //TEST MOGELIJKE INPUT VAN ARDUINO
-        String arduinoteststring = "year=1978season=1modifier=1";
+        String arduinoteststring = "year=1988season=1modifier=1";
 
         try {
             currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);
@@ -26,7 +26,7 @@ public class Debug extends WeatherDomeProject {
         
         videomanager.changeScene(currentWeatherState);
         
-        arduinoteststring = "year=1988season=1modifier=1";
+        arduinoteststring = "year=1978season=1modifier=1";
 
         try {
             currentWeatherState = ParseDecider.parseData(arduinoteststring, twentedb);

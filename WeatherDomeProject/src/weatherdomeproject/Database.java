@@ -206,7 +206,7 @@ public class Database {
                         + "########################################################################");
                 
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(100);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(WeatherDomeProject.class.getName()).log(Level.SEVERE, null, ex);
                 }

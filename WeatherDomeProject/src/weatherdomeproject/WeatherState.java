@@ -144,34 +144,121 @@ class FutureWeatherState extends WeatherState {
     FutureWeatherState(int modifier, int season) {
         super.modifier = modifier;
         super.season = season;
-        determineWeather(modifier);
+        determineWeather(modifier, season);
     }
     
-    private void determineWeather(int modifier) {
+    private void determineWeather(int modifier, int season) {
         switch(modifier) {
             case 0: //NO CHANGE
-                super.temperatureIntensity = 40;
-                super.windIntensity = 3;
-                super.cloudIntensity = 3;
-                super.precipitationType = 2;
+                switch(season) {
+                    case 0:
+                        super.temperatureIntensity = 40;
+                        super.windIntensity = 3;
+                        super.cloudIntensity = 3;
+                        super.precipitationType = 2;
+                        break;
+                    case 1:
+                        super.temperatureIntensity = 45;
+                        super.windIntensity = 3;
+                        super.cloudIntensity = 3;
+                        super.precipitationType = 2;
+                        break;
+                    case 2:
+                        super.temperatureIntensity = 35;
+                        super.windIntensity = 3;
+                        super.cloudIntensity = 3;
+                        super.precipitationType = 2;
+                        break;
+                    case 3:
+                        super.temperatureIntensity = 30;
+                        super.windIntensity = 3;
+                        super.cloudIntensity = 3;
+                        super.precipitationType = 2;
+                        break;
+                }
                 break;
             case 1: //NO MEAT
-                super.temperatureIntensity = 0;
-                super.windIntensity = 2;
-                super.cloudIntensity = 1;
-                super.precipitationType = 3;
+                switch(season) {
+                    case 0:
+                        super.temperatureIntensity = 18;
+                        super.windIntensity = 2;
+                        super.cloudIntensity = 1;
+                        super.precipitationType = 0;
+                        break;
+                    case 1:
+                        super.temperatureIntensity = 22;
+                        super.windIntensity = 1;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                    case 2:
+                        super.temperatureIntensity = 12;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                    case 3:
+                        super.temperatureIntensity = -5;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 3;
+                        break;
+                }
                 break;
             case 2: //NUCLEAR WINTER
-                super.temperatureIntensity = 10;
-                super.windIntensity = 0;
-                super.cloudIntensity = 0;
-                super.precipitationType = 0;
-                break;
+                switch(season) {
+                    case 0:
+                        super.temperatureIntensity = 1;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                    case 1:
+                        super.temperatureIntensity = 1;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                    case 2:
+                        super.temperatureIntensity = 1;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                    case 3:
+                        super.temperatureIntensity = 1;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                }
             case 3: //NO FOSSIL FUEL
-                super.temperatureIntensity = 20;
-                super.windIntensity = 3;
-                super.cloudIntensity = 3;
-                super.precipitationType = 1;
+                switch(season) {
+                    case 0:
+                        super.temperatureIntensity = 18;
+                        super.windIntensity = 2;
+                        super.cloudIntensity = 1;
+                        super.precipitationType = 0;
+                        break;
+                    case 1:
+                        super.temperatureIntensity = 22;
+                        super.windIntensity = 1;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                    case 2:
+                        super.temperatureIntensity = 12;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 0;
+                        break;
+                    case 3:
+                        super.temperatureIntensity = -5;
+                        super.windIntensity = 0;
+                        super.cloudIntensity = 0;
+                        super.precipitationType = 3;
+                        break;
+                }
                 break;
         }
     }
