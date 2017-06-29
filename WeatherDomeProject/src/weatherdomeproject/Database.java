@@ -73,10 +73,33 @@ public class Database {
                         editData.add(Integer.parseInt(s));
                     }                
                 }
+                
+                //CHECK SEASON
+                String date = readArr[0];
+                Debug.log(date);
+                char[] datearr = date.toCharArray();
+                char[] month = {datearr[5], datearr[6]};
+                char[] day = {datearr[6], datearr[7]};
+                int maand = Integer.parseInt(new String(month));
+                int dag = Integer.parseInt(new String(day));
+                
+                int season = 4;
+                
+                if ((maand <= 2 || (maand < 3 && dag <20)) || (maand == 12 && dag >= 21)) {
+                    season = 0;
+                } else if (maand <= 5 || (maand == 6 && dag < 21)) {
+                    season = 1;
+                } else if (maand <= 8 || (maand == 9 && dag < 22)) {
+                    season = 2;
+                } else if (maand <= 11 || (maand == 12 && dag < 21)) {
+                    season = 3;
+                }
+                
+                Debug.log(season + "");
 
                 selector.changeScene(new HistoryWeatherState(new WeatherDatabaseStruct(editData.get(1), editData.get(2), editData.get(3), editData.get(4), editData.get(5)
                         , editData.get(6), editData.get(7), editData.get(8), editData.get(9), editData.get(10), editData.get(11)
-                        , editData.get(12), editData.get(13), editData.get(14), editData.get(15)),1));
+                        , editData.get(12), editData.get(13), editData.get(14), editData.get(15)),season));
 
                 try {
                     Thread.sleep(2500);
